@@ -1,3 +1,10 @@
 <template bind>
   <definition-list items="{{items}}" name="{{name}}"></definition-list>
+  <definition-list items="{{items && items}}" name="{{name}}"></definition-list>
+  <template if="{{items.length}}">
+    <definition-list items="{{items | ident}}" name="{{name}}"></definition-list>
+  </template>
+  <template if="{{items.length > 3}}">
+    <definition-list items="{{items | ident}}" name="{{name}}"></definition-list>
+  </template>
 </template>

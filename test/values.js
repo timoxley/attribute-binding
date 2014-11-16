@@ -11,6 +11,7 @@ test('setup', function(t) {
   let template = () => domify(
     fs.readFileSync(__dirname + '/values.html', 'utf8')
   )
+
   model = {
     name: 'TEST',
     items: [
@@ -19,7 +20,9 @@ test('setup', function(t) {
       {name: 'blue', value: '#0000FF'}
     ]
   }
-  let el = template().createInstance(model, new PolymerExpressions())
+  let expressions = new PolymerExpressions()
+  expressions.ident = ((item) => item)
+  let el = template().createInstance(model, expressions)
 
   document.body.innerHTML = ''
   document.body.appendChild(el)
@@ -27,30 +30,52 @@ test('setup', function(t) {
 })
 
 test('string values are bound', function(t) {
-  t.equal(document.querySelector('definition-list h3').textContent.trim(), model.name)
+  let h3s = Array.from(document.querySelectorAll('definition-list h3'))
+  h3s.forEach((h3) => t.equal(h3.textContent.trim(), model.name))
   t.end()
 })
 
 test('object values are bound', function(t) {
-  var itemLength = document.querySelector('definition-list dl').title.trim()
-  t.equal(parseInt(itemLength), model.items.length)
+  let dls = Array.from(document.querySelectorAll('definition-list dl'))
+  dls.forEach((dl) => t.looseEqual(dl.title.trim(), model.items.length))
   t.end()
 })
 
 test('iterates arrays are bound', function(t) {
-  let el = document.querySelector('definition-list')
-  let dts = Array.from(el.querySelectorAll('dt'))
-  let dds = Array.from(el.querySelectorAll('dd'))
-  t.ok(el.querySelectorAll('dl').length)
-  t.deepEqual(
-    dts.map((dt) => dt.textContent.trim()),
-    model.items.map((item) => item.name)
-  )
-  t.deepEqual(
-    dds.map((dd) => dd.textContent.trim()),
-    model.items.map((item) => item.value)
-  )
+  let dfnLists = Array.from(document.querySelectorAll('definition-list'))
+  dfnLists.forEach((el) => {
+    let dts = Array.from(el.querySelectorAll('dt'))
+    let dds = Array.from(el.querySelectorAll('dd'))
+    t.ok(el.querySelectorAll('dl').length)
+    t.deepEqual(
+      dts.map((dt) => dt.textContent.trim()),
+      model.items.map((item) => item.name)
+    )
+    t.deepEqual(
+      dds.map((dd) => dd.textContent.trim()),
+      model.items.map((item) => item.value)
+    )
+  })
   t.end()
 })
 
-
+test('updates with changes', function(t) {
+  model.items.push({name: 'purple', value: '#FF00FF'})
+  setTimeout(function() {
+    let dfnLists = Array.from(document.querySelectorAll('definition-list'))
+    dfnLists.forEach((el) => {
+      let dts = Array.from(el.querySelectorAll('dt'))
+      let dds = Array.from(el.querySelectorAll('dd'))
+      t.ok(el.querySelectorAll('dl').length)
+      t.deepEqual(
+        dts.map((dt) => dt.textContent.trim()),
+        model.items.map((item) => item.name)
+      )
+      t.deepEqual(
+        dds.map((dd) => dd.textContent.trim()),
+        model.items.map((item) => item.value)
+      )
+    })
+    t.end()
+  })
+})
