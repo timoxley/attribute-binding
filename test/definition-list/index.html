@@ -1,0 +1,8 @@
+<template bind>
+  <h3>{{name}}</h3>
+  <dl title="{{items.length}}">
+    <template repeat="{{items}}">
+      <dt>{{name}}</dt><dd>{{value}}</dd>
+    </template>
+  </dl>
+</template>

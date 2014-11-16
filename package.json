@@ -1,0 +1,40 @@
+{
+  "name": "attribute-binding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd test && beefy index.js:bundle.js",
+    "test": "browserify test/smokestack.js | smokestack | tap-spec"
+  },
+  "keywords": [],
+  "author": "Tim Oxley <secoif@gmail.com>",
+  "license": "ISC",
+  "browserify": {
+    "transform": [
+      "6to5-browserify",
+      "brfs"
+    ]
+  },
+  "devDependencies": {
+    "6to5-browserify": "~1.2.0",
+    "beefy": "~2.1.1",
+    "brfs": "~1.2.0",
+    "browserify": "~6.3.2",
+    "custom-element": "~2.0.0",
+    "domify": "~1.3.1",
+    "polyfill-webcomponents": "~0.20141030.1",
+    "polymer-expressions": "~0.3.6",
+    "smokestack": "~2.0.0",
+    "tap-spec": "~1.0.1",
+    "tape": "~3.0.3",
+    "templatebinding": "~0.3.4"
+  },
+  "dependencies": {
+    "6to5": "~1.12.15",
+    "clone": "~0.1.18",
+    "dotty": "0.0.2",
+    "lodash.clonedeep": "~2.4.1",
+    "sliced": "0.0.5"
+  }
+}

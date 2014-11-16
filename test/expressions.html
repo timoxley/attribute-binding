@@ -1,0 +1,17 @@
+<template bind>
+  <button>Toggle</button>
+  <content-toggle name="apple" open="{{!toggle.state.closed}}"></content-toggle>
+  <content-toggle name="banana" closed="{{toggle.state.closed}}"></content-toggle>
+  <content-toggle name="banana" closed="{{!!toggle.state.closed}}"></content-toggle>
+  <content-toggle open="{{toggle.state.closed ? false : true}}"></content-toggle>
+  <content-toggle open="{{toggle.state.closed ? false : true}}"></content-toggle>
+  <content-toggle open="{{toggle.state && !toggle.state.closed}}"></content-toggle>
+  <template if="{{toggle.state.closed}}">
+    <content-toggle open="{{!toggle.state.closed}}"><h1>pineapple {{toggle.state.closed}}</h1></content-toggle>
+    <content-toggle closed="{{toggle.state.closed}}"><h1>pineapple {{toggle.state.closed}}</h1></content-toggle>
+  </template>
+  <template if="{{!toggle.state.closed}}">
+    <content-toggle open="{{!toggle.state.closed}}"><h1>carrot {{toggle.state.closed}}</h1></content-toggle>
+    <content-toggle closed="{{toggle.state.closed}}"><h1>carrot {{toggle.state.closed}}</h1></content-toggle>
+  </template>
+</template>
