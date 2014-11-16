@@ -1,5 +1,5 @@
 const CustomElement = require('custom-element')
-const AttributeBinding = require('../../')
+const AttributeBinding = require('../../index')
 const domify = require('domify')
 const fs = require('fs')
 

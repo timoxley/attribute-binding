@@ -1,6 +1,6 @@
-module.exports = function(Definition) {
-  "use strict"
+"use strict"
 
+module.exports = function(Definition) {
   if (Definition.bind) return Definition.bind
   var proto = Definition.prototype
 

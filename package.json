@@ -1,10 +1,11 @@
 {
   "name": "attribute-binding",
   "version": "1.0.1",
-  "main": "index.js",
+  "main": "build.js",
   "scripts": {
-    "start": "cd test && beefy index.js:bundle.js",
-    "test": "browserify test/smokestack.js | smokestack | tap-spec"
+    "start": "make start",
+    "test": "make test",
+    "prepublish": "make prepublish"
   },
   "keywords": [],
   "author": "Tim Oxley <secoif@gmail.com>",
