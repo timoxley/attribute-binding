@@ -1,7 +1,6 @@
 {
   "name": "attribute-binding",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "cd test && beefy index.js:bundle.js",
@@ -28,13 +27,20 @@
     "smokestack": "~2.0.0",
     "tap-spec": "~1.0.1",
     "tape": "~3.0.3",
-    "templatebinding": "~0.3.4"
+    "templatebinding": "~0.3.4",
+    "6to5": "~1.12.15"
   },
   "dependencies": {
-    "6to5": "~1.12.15",
-    "clone": "~0.1.18",
-    "dotty": "0.0.2",
-    "lodash.clonedeep": "~2.4.1",
-    "sliced": "0.0.5"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timoxley/attribute-binding.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timoxley/attribute-binding/issues"
+  },
+  "homepage": "https://github.com/timoxley/attribute-binding"
 }

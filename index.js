@@ -1,7 +1,3 @@
-const dotty = require('dotty')
-const slice = require('sliced')
-const clone = require('clone')
-
 module.exports = function(Definition) {
   "use strict"
 
@@ -105,5 +101,4 @@ function cloneObserver(observer) {
   }
 
   return newObserver
-
 }
