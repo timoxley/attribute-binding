@@ -19,7 +19,6 @@ DefinitionList.on('created', function() {
 
 AttributeBinding(DefinitionList)
 .onChange('items', function(items) {
-  console.log('items bind')
   this.model.items = items
 })
 .onChange('name', function(name) {
@@ -28,7 +27,6 @@ AttributeBinding(DefinitionList)
 
 
 DefinitionList.on('attached', function() {
-  console.log('DL attached')
   this.appendChild(template().createInstance(this.model, new PolymerExpressions()))
 })
 

@@ -11,9 +11,8 @@ module.exports = function(Definition) {
     if (observers[name] && observers[name] !== observer) {
       observers[name].close()
     }
+
     return observers[name] = observer
-    //let newObserver = cloneObserver(observer)
-    //return HTMLElement.prototype.bind.call(this, name, newObserver)
   }
 
   Definition.on('created', function() {
@@ -54,51 +53,4 @@ module.exports = function(Definition) {
   }
 
   return Definition
-}
-
-function cloneObserver(observer) {
-  let newObserver = undefined
-
-  if (observer instanceof Path) {
-    return Path.get(observer)
-  }
-  if (observer instanceof PathObserver) {
-    newObserver = new PathObserver(observer.object_, observer.path_)
-  }
-  if (observer instanceof ArrayObserver) {
-    newObserver = new ArrayObserver(observer.value_)
-  }
-  if (observer instanceof ObjectObserver) {
-    newObserver = new ObjectObserver(observer.value_)
-  }
-  if (observer instanceof ObserverTransform) {
-    newObserver = new ObserverTransform(
-      cloneObserver(observer.observable_),
-      observer.getValueFn_,
-      observer.setValueFn_,
-      observer.dontPassThroughSet_
-    )
-  }
-
-  if (observer instanceof CompoundObserver) {
-    newObserver = new CompoundObserver(observer.reportChangesOnOpen_)
-
-    for (let i = 0; i < observer.observed_.length; i += 2) {
-      let object = observer.observed_[i]
-      let observ = observer.observed_[i + 1]
-      if (observ instanceof Path) {
-        newObserver.addPath(object, Path.get(observ))
-      } else {
-        newObserver.addObserver(cloneObserver(observ))
-      }
-    }
-  }
-
-  if (!newObserver) throw new Error('Could not clone observer:' + observer)
-
-  if (observer.callback_) {
-    newObserver.open(observer.callback_)
-  }
-
-  return newObserver
 }
