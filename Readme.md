@@ -1,26 +1,36 @@
 # attribute-binding
 
-Bind to incoming data via attributes.
+Bind to incoming data via attributes on your custom elements.
 
-For [custom-element](https://github.com/requireio/custom-element)s
+For [custom-element](https://github.com/requireio/custom-element).
+
+## Example
+
+```html
+<template bind>
+  <content-toggle open="{{open}}"></content-toggle>
+</template>
+```
 
 ```js
-const CustomElement = require('custom-element')
-const AttributeBinding = require('attribute-binding')
 
 // prerequisites
 require('polyfill-webcomponents')
-require('polymer-expressions')
 require('templatebinding')
+const PolymerExpressions = require('polymer-expressions')
+
+const CustomElement = require('custom-element')
+const AttributeBinding = require('attribute-binding')
 
 let ContentToggle = CustomElement()
-AttributeBinding(ContentToggle)
 
 ContentToggle.on('created', function() {
   this.model = {
     open: false
   }
 })
+
+AttributeBinding(ContentToggle)
 
 ContentToggle.onChange('open', function(open) {
   this.model.open = open
@@ -44,8 +54,7 @@ document.body.appendChild(
 )
 ```
 
-```html
-<template bind>
-  <content-toggle open="{{open}}"></content-toggle>
-</template>
-```
+## License
+
+MIT
+
