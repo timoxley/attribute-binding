@@ -1,6 +1,6 @@
 {
   "name": "attribute-binding",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "start": "cd test && beefy index.js:bundle.js",
