@@ -33,6 +33,8 @@ ContentToggle.on('created', function() {
 AttributeBinding(ContentToggle)
 
 ContentToggle.onChange('open', function(open) {
+  // fired whenever the "open" attribute changes
+  // with bound data.
   this.model.open = open
 })
 
