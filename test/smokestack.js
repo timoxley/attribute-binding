@@ -10,7 +10,7 @@ document.body.appendChild(
   body
 )
 
-test('shudown', function(t) {
+test('shutdown', function(t) {
   t.end()
   setTimeout(function() {
     window.close()
