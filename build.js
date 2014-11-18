@@ -34,21 +34,27 @@ module.exports = function (Definition) {
     var _this = this;
     var observers = this._observers;
     for (var name in observers) {
-      (function (name) {
+      var _ret = (function (name) {
         observers[name].open(function () {
           var args = _slice.call(arguments);
 
           // deliver changes
+          if (!_this._listeners[name]) return;
           for (var i = 0; i < _this._listeners[name].length; i++) {
             _this._listeners[name][i].call.apply(_this._listeners[name][i], [_this].concat(Array.from(args)));
           }
         });
 
+        if (!_this._listeners[name]) return {
+          v: undefined
+        };
         // deliver initial value
         for (var i = 0; i < _this._listeners[name].length; i++) {
           _this._listeners[name][i].call(_this, observers[name].value_);
         }
       })(name);
+
+      if (typeof _ret === "object") return _ret.v;
     }
   });
 
