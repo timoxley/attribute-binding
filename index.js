@@ -32,11 +32,13 @@ module.exports = function(Definition) {
     for(let name in observers) {
       observers[name].open((...args) => {
         // deliver changes
+        if (!this._listeners[name]) return
         for (let i = 0; i < this._listeners[name].length; i++) {
           this._listeners[name][i].call(this, ...args)
         }
       })
 
+      if (!this._listeners[name]) return
       // deliver initial value
       for (let i = 0; i < this._listeners[name].length; i++) {
         this._listeners[name][i].call(this, observers[name].value_)
